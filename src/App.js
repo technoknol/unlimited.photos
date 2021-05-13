@@ -20,7 +20,9 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Hello IPFS</h1>
+      <h1>
+        Upload any number of Images to truly Unlimited Image sharing website.
+      </h1>
       <MyDropzone />
     </div>
   );
@@ -60,7 +62,11 @@ function MyDropzone() {
     [images]
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/jpeg, image/png, image/*",
+    multiple: false
+  });
 
   return (
     <div {...getRootProps()} style={{ border: "5px dotted red", height: 150 }}>
@@ -71,7 +77,7 @@ function MyDropzone() {
         <p>Drag 'n' drop some files here, or click to select files</p>
       )}
       {images.length > 0 &&
-        images.map((item) => <img src={cdnUrl(item)} width="100" />)}
+        images.map((item) => <img src={cdnUrl(item)} key={item} width="100" />)}
     </div>
   );
 }
